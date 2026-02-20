@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
         //Fetch the Rigidbody component you attach from your GameObject
         m_Rigidbody = GetComponent<Rigidbody>();
         //Set the speed of the GameObject
-        m_Speed = 5.0f;
+        m_Speed = 6.0f;
         
     }
 
@@ -44,6 +44,14 @@ public class Player : MonoBehaviour
     {
         Debug.Log("Jumped");
         m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x,m_Rigidbody.velocity.y + m_Speed * 2f, m_Rigidbody.velocity.z);
+    }
+
+    void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "Conveyor")
+        {
+            
+        }
     }
 
 }
