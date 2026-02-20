@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
 
     float yDirection;
 
+    float xPos;
+
     void Start()
     {
         //Fetch the Rigidbody component you attach from your GameObject
