@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
         Debug.Log("Jumped");
         jumped = true;
         // m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x,m_Rigidbody.velocity.y + m_Speed * 8f, m_Rigidbody.velocity.z);
-        yDirection = 2.0f;
+        yDirection = 4.0f;
         direction.y = yDirection;
         // m_Rigidbody.transform.Translate(Vector3.up * Time.deltaTime, Space.World);
         // m_Rigidbody.AddForce(transform.up * 20f);
