@@ -1,0 +1,10 @@
+# 所有文本文件自动处理
+* text=auto
+
+# Unity 特定文件
+*.cs text
+*.shader text
+*.txt text
+*.json text
+*.asmdef text
+*.meta text
