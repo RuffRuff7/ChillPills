@@ -1,10 +1,41 @@
-# 所有文本文件自动处理
-* text=auto
+# Unity Text Files
+*.cs          text eol=lf
+*.shader      text eol=lf
+*.cginc       text eol=lf
+*.uxml        text eol=lf
+*.asmdef      text eol=lf
+*.txt         text eol=lf
+*.json        text eol=lf
+*.xml         text eol=lf
+*.yml         text eol=lf
+*.md          text eol=lf
+*.asmref      text eol=lf
 
-# Unity 特定文件
-*.cs text
-*.shader text
-*.txt text
-*.json text
-*.asmdef text
-*.meta text
+# Unity Meta Files
+*.meta        text eol=lf
+
+# Scene / Prefab / Asset Files (yaml based)
+*.unity       text eol=lf
+*.prefab      text eol=lf
+*.mat         text eol=lf
+*.controller  text eol=lf
+*.anim        text eol=lf
+*.mask        text eol=lf
+*.physicMaterial2D text eol=lf
+
+# Binary files (do not change)
+*.png         binary
+*.jpg         binary
+*.jpeg        binary
+*.tga         binary
+*.mp3         binary
+*.wav         binary
+*.ogg         binary
+*.fbx         binary
+*.prefab      binary
+*.mat         binary
+*.ttf         binary
+*.otf         binary
+
+# Auto detect text files (fallback)
+* text=auto
