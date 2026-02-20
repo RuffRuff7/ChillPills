@@ -234,8 +234,8 @@ Transform:
   m_GameObject: {fileID: 568758304}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
-  m_LocalPosition: {x: 0.01, y: 3.12, z: -3.44}
-  m_LocalScale: {x: 1.5832189, y: 0.24957521, z: 1.1459075}
+  m_LocalPosition: {x: 0.01, y: 3.12, z: -5.02}
+  m_LocalScale: {x: 1.5832189, y: 0.24957521, z: 4.8475327}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -340,8 +340,8 @@ Transform:
   m_GameObject: {fileID: 678439193}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.2362, y: 3.2362, z: 3.2362}
+  m_LocalPosition: {x: 0, y: 0, z: -48.12}
+  m_LocalScale: {x: 3.2362, y: 3.2362, z: 14.639599}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -643,13 +643,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13641773, y: -0, z: -0, w: 0.9906514}
-  m_LocalPosition: {x: 0, y: 6.56, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.05676689, y: 0.7048245, z: -0.05676689, w: 0.7048245}
+  m_LocalPosition: {x: -11.260079, y: 0.95424384, z: -0.8906276}
+  m_LocalScale: {x: 1.5904068, y: 1.5904067, z: 1.5904067}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 15.681, y: 0, z: 0}
+  m_Father: {fileID: 1018860778}
+  m_LocalEulerAnglesHint: {x: 9.209, y: 90, z: 0}
 --- !u!1 &1018860773
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,7 +781,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 5.63, z: 0.53}
   m_LocalScale: {x: 0.62877, y: 0.62877, z: 0.62877}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 963194228}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1018860779
@@ -796,6 +797,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7834cd3399291476385e9d4d39d20a98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Speed: 0
+  direction: {x: 0, y: 0, z: 0}
 --- !u!1 &1598323732
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,10 +1039,9 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 963194228}
+  - {fileID: 1018860778}
   - {fileID: 705507995}
   - {fileID: 678439197}
-  - {fileID: 1018860778}
   - {fileID: 855089572}
   - {fileID: 1598323737}
   - {fileID: 1850037516}

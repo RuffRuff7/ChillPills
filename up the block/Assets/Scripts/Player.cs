@@ -6,9 +6,14 @@ public class Player : MonoBehaviour
 {
     // Start is called before the first frame update
     Rigidbody m_Rigidbody;
-    float m_Speed;
+    public float m_Speed;
 
-    Vector3 direction;
+    bool collided;
+
+    bool jumped;
+    public Vector3 direction;
+
+    float yDirection;
 
     void Start()
     {
@@ -16,42 +21,65 @@ public class Player : MonoBehaviour
         m_Rigidbody = GetComponent<Rigidbody>();
         //Set the speed of the GameObject
         m_Speed = 6.0f;
-        
+        yDirection = 0.0f;
+        jumped = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) && m_Rigidbody.velocity.y == 0) 
+        
+        if (collided)
         {
-            Jump();
+            
+           if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) {
+                Jump();
+            }
+            m_Rigidbody.velocity = direction * m_Speed;
         }
+        if (!collided && !jumped)
+        {
+            m_Rigidbody.velocity = -transform.up * 8.0f;
+        }
+        // if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) && m_Rigidbody.velocity.y == 0) 
+        // {
+        //     Jump();
+        // }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        
+        collided = true;
+        jumped = false;
         if (collision.gameObject.tag == "Conveyor")
         {
             Debug.Log("collided");
+            
+            m_Speed = 2.0f;
             ConveyorPlatform platform = collision.gameObject.GetComponent<ConveyorPlatform>();
             direction = platform.getDirection();
-            m_Rigidbody.velocity = direction * m_Speed;
+            yDirection = 0.0f;
+            direction.y = yDirection;
         }
     }
 
     void Jump()
     {
         Debug.Log("Jumped");
-        m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x,m_Rigidbody.velocity.y + m_Speed * 2f, m_Rigidbody.velocity.z);
+        jumped = true;
+        // m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x,m_Rigidbody.velocity.y + m_Speed * 8f, m_Rigidbody.velocity.z);
+        yDirection = 2.0f;
+        direction.y = yDirection;
+        // m_Rigidbody.transform.Translate(Vector3.up * Time.deltaTime, Space.World);
+        // m_Rigidbody.AddForce(transform.up * 20f);
     }
 
-    void OnCollisionStay(Collision collision)
+    void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.tag == "Conveyor")
-        {
-            
-        }
+        collided = false;
+        m_Speed = 0.0f;
+        // yDirection = 0.0f;
+        // direction.y = yDirection;
     }
 
 }
