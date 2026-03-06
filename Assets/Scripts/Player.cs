@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     // Start is called before the first frame update
+    public Vector3 spawnPoint;
     Rigidbody m_Rigidbody;
     public float m_Speed;
 
@@ -41,7 +42,7 @@ public class Player : MonoBehaviour
         }
         if (!collided && !jumped)
         {
-            m_Rigidbody.velocity = -transform.up * 8.0f;
+            m_Rigidbody.velocity = -transform.up * 4.0f;
         }
         // if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) && m_Rigidbody.velocity.y == 0) 
         // {
@@ -57,11 +58,16 @@ public class Player : MonoBehaviour
         {
             Debug.Log("collided");
             
-            m_Speed = 2.0f;
+            m_Speed = 4.0f;
             ConveyorPlatform platform = collision.gameObject.GetComponent<ConveyorPlatform>();
             direction = platform.getDirection();
             yDirection = 0.0f;
             direction.y = yDirection;
+        }
+        if (collision.gameObject.tag == "Floor")
+        {
+            Debug.Log("Respawn!");
+            transform.position = spawnPoint;
         }
     }
 
@@ -70,7 +76,7 @@ public class Player : MonoBehaviour
         Debug.Log("Jumped");
         jumped = true;
         // m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x,m_Rigidbody.velocity.y + m_Speed * 8f, m_Rigidbody.velocity.z);
-        yDirection = 4.0f;
+        yDirection = 1.0f;
         direction.y = yDirection;
         // m_Rigidbody.transform.Translate(Vector3.up * Time.deltaTime, Space.World);
         // m_Rigidbody.AddForce(transform.up * 20f);
