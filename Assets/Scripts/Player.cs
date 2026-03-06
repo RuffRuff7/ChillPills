@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     public Vector3 spawnPoint;
     Rigidbody m_Rigidbody;
+    BoxCollider m_BoxCollider;
     public float m_Speed;
 
     bool collided;
@@ -22,6 +23,8 @@ public class Player : MonoBehaviour
     {
         //Fetch the Rigidbody component you attach from your GameObject
         m_Rigidbody = GetComponent<Rigidbody>();
+        //Fetch the Box Collider component you attach from your GameObject
+        m_BoxCollider = GetComponent<BoxCollider>();
         //Set the speed of the GameObject
         m_Speed = 6.0f;
         yDirection = 0.0f;
@@ -58,11 +61,14 @@ public class Player : MonoBehaviour
         {
             Debug.Log("collided");
             
-            m_Speed = 4.0f;
-            ConveyorPlatform platform = collision.gameObject.GetComponent<ConveyorPlatform>();
-            direction = platform.getDirection();
-            yDirection = 0.0f;
-            direction.y = yDirection;
+            if (collision.gameObject.GetComponent<BoxCollider>().bounds.max.y - 0.1 < m_BoxCollider.bounds.min.y) 
+            {
+                m_Speed = 4.0f;
+                ConveyorPlatform platform = collision.gameObject.GetComponent<ConveyorPlatform>();
+                direction = platform.getDirection();
+                yDirection = 0.0f;
+                direction.y = yDirection;
+            }
         }
         if (collision.gameObject.tag == "Floor")
         {
