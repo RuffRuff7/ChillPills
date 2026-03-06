@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Conveyor
   - Floor
+  - JumpPower
   layers:
   - Default
   - TransparentFX

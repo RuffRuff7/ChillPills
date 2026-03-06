@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     bool collided;
 
     bool jumped;
+    bool jumpPower;
     public Vector3 direction;
 
     float yDirection;
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour
         m_Speed = 6.0f;
         yDirection = 0.0f;
         jumped = false;
+        jumpPower = false;
     }
 
     // Update is called once per frame
@@ -40,12 +42,21 @@ public class Player : MonoBehaviour
             
            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) {
                 Jump();
-            }
+           }
             m_Rigidbody.velocity = direction * m_Speed;
         }
         if (!collided && !jumped)
         {
             m_Rigidbody.velocity = -transform.up * 4.0f;
+        }
+        if (!collided && jumpPower) 
+        {
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+            {
+                Jump();
+                jumpPower = false;
+                m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, m_Rigidbody.velocity.y + 4, m_Rigidbody.velocity.z);
+            }
         }
         // if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) && m_Rigidbody.velocity.y == 0) 
         // {
@@ -60,8 +71,10 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Conveyor")
         {
             Debug.Log("collided");
+            Debug.Log(collision.gameObject.GetComponent<BoxCollider>().bounds.max.y - 0.05);
+            Debug.Log(m_BoxCollider.bounds.min.y);
             
-            if (collision.gameObject.GetComponent<BoxCollider>().bounds.max.y - 0.1 < m_BoxCollider.bounds.min.y) 
+            if (collision.gameObject.GetComponent<BoxCollider>().bounds.max.y - 0.05 < m_BoxCollider.bounds.min.y) 
             {
                 m_Speed = 4.0f;
                 ConveyorPlatform platform = collision.gameObject.GetComponent<ConveyorPlatform>();
@@ -69,11 +82,22 @@ public class Player : MonoBehaviour
                 yDirection = 0.0f;
                 direction.y = yDirection;
             }
+            else
+            {
+                collided = false;
+            }
         }
         if (collision.gameObject.tag == "Floor")
         {
             Debug.Log("Respawn!");
             transform.position = spawnPoint;
+        }
+        if (collision.gameObject.tag == "JumpPower")
+        {
+            Debug.Log("Power");
+            jumpPower = true;
+            Destroy(collision.gameObject);
+            collided = false;
         }
     }
 
