@@ -10,6 +10,9 @@ public class UIManager : MonoBehaviour
     private bool isPaused = false;
     private bool hasStartedGame = false;
 
+    private static bool loadMainMenuOnStart = false;
+    private static bool hasLoadedOnce = false;
+
     void Start()
     {
         Time.timeScale = 1f;
@@ -17,7 +20,21 @@ public class UIManager : MonoBehaviour
         if (pausePanel != null)
             pausePanel.SetActive(false);
 
-        if (startPausedOnMainMenu && mainMenuPanel != null)
+        bool shouldShowMainMenu = false;
+
+        if (loadMainMenuOnStart)
+        {
+            shouldShowMainMenu = true;
+            loadMainMenuOnStart = false;
+        }
+        else if (!hasLoadedOnce && startPausedOnMainMenu)
+        {
+            shouldShowMainMenu = true;
+        }
+
+        hasLoadedOnce = true;
+
+        if (shouldShowMainMenu)
         {
             ShowMainMenu();
         }
@@ -28,14 +45,15 @@ public class UIManager : MonoBehaviour
 
             hasStartedGame = true;
             isPaused = false;
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
 
     void Update()
     {
-
         if (!hasStartedGame) return;
-
         if (pausePanel == null) return;
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -72,6 +90,9 @@ public class UIManager : MonoBehaviour
 
         if (pausePanel != null)
             pausePanel.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void Pause()
@@ -93,11 +114,22 @@ public class UIManager : MonoBehaviour
 
         if (pausePanel != null)
             pausePanel.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void RestartScene()
     {
         Time.timeScale = 1f;
+        loadMainMenuOnStart = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void ReturnToMainMenu()
+    {
+        Time.timeScale = 1f;
+        loadMainMenuOnStart = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
